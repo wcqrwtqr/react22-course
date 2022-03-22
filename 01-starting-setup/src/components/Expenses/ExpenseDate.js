@@ -1,6 +1,7 @@
 import React from 'react';
 import './ExpenseDate.css'
-function ExpenseDate(props){
+
+const ExpenseDate = (props) => {
   const month = props.date.getMonth()
   const year = props.date.getFullYear()
   const day = props.date.getDate()
