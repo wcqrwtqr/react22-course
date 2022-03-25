@@ -6,12 +6,30 @@ import Card from '../UI/Card'
 
 const Expenses = (props) => {
 
-  const [filteredYear, setSelectedYear] = useState('2020')
+  const [filteredYear, setFilteredYear] = useState('2021');
 
   const filterChangeHandler = (selectedYear) => {
-    setSelectedYear(selectedYear)
+    setFilteredYear(selectedYear)
     console.log(`one level up :: Year selected ${selectedYear}`)
   }
+
+  // Adding the filter logic to get the drop down list filter the expenses
+  const filteredExpenses = props.items.filter(el => (
+    el.date.getFullYear() == filteredYear.toString()
+  ))
+
+  let expensesContenet = <p>No expenses found.</p>;
+  if (filteredExpenses.length > 0) {
+    expensesContenet = filteredExpenses.map(el => (
+      <ExpenseItem
+        key={el.id}
+        title={el.title}
+        amount={el.amount}
+        date={el.date} />
+    ))
+  }
+
+
 
   return (
     <div>
@@ -19,13 +37,7 @@ const Expenses = (props) => {
         <ExpensesFitler selected={filteredYear}
           onChangeFilter={filterChangeHandler} />
 
-        {props.items.map(el => (
-          <ExpenseItem
-            key={el.id}
-            title={el.title}
-            amount={el.amount}
-            date={el.date} />
-        ))}
+        {expensesContenet}
 
       </Card>
     </div>
