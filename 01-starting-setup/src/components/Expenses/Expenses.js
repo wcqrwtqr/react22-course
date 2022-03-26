@@ -3,6 +3,7 @@ import './Expenses.css'
 // import ExpenseItem from './ExpenseItem'
 import ExpensesFitler from './ExpensesFilter'
 import ExpensesList from './ExpensesList'
+import ExpensesChart from './ExpensesChart'
 import Card from '../UI/Card'
 
 const Expenses = (props) => {
@@ -11,7 +12,7 @@ const Expenses = (props) => {
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear)
-    console.log(`one level up :: Year selected ${selectedYear}`)
+    // console.log(`one level up :: Year selected ${selectedYear}`)
   }
 
   // Adding the filter logic to get the drop down list filter the expenses
@@ -24,10 +25,9 @@ const Expenses = (props) => {
     <div>
       <Card className='expenses'>
         <ExpensesFitler selected={filteredYear}
-          onChangeFilter={filterChangeHandler} />
-
+          onChangeFilter={filterChangeHandler}/>
+        <ExpensesChart expenses={filteredExpenses}/>
         <ExpensesList items={filteredExpenses}/>
-
       </Card>
     </div>
   )
